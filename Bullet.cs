@@ -29,9 +29,9 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("TargetStanding"))
+        if(other.gameObject.CompareTag("TargetStanding") || other.gameObject.CompareTag("TargetFloating"))
         {
-            Debug.Log("I hit the standing target.");
+            //Debug.Log("I hit the standing target.");
             //add code to add hit points to your scoreboard
             GameObject.Find("Game Manager").GetComponent<GameManager>().UpdateTargetAmount();
             //gray out the standing target
@@ -39,14 +39,7 @@ public class Bullet : MonoBehaviour
             other.gameObject.SetActive(false);
         }
 
-        if(other.gameObject.CompareTag("TargetFloating"))
-        {
-            Debug.Log("I hit the floating target");
-            //add code to add hit points to your scoreboard
-            GameObject.Find("Game Manager").GetComponent<GameManager>().UpdateTargetAmount();
-            //gray out the standing target
-            Destroy(this.gameObject);
-            other.gameObject.SetActive(false);
-        }
+        //if bullet hits any object other than the target
+        Destroy(this.gameObject);
     }
 }
